@@ -28,8 +28,9 @@ def countMostUsed(s: str):
             if s[i] not in chars:
                 s = s.replace(s[i], ' ')
 
-        print(s)
         s = s.lower().split()
+        print(s)
+        s_len = len(s)
 
         if len(s) == 0:
             return []
@@ -51,7 +52,7 @@ def countMostUsed(s: str):
             else:
                 most_used = list(d_sorted.keys())[:3]
 
-            return most_used
+            return most_used, s_len
 
 with open ("test_data.txt", "r") as file:
     content = file.read()
