@@ -1,8 +1,10 @@
 import string
+import pytest
+import allure
 
 
 def keyword_cipher(msg, keyword):
-    msg =  msg.lower()
+    msg = msg.lower()
     alphabet = string.ascii_lowercase
     work_keyword = ''
 
@@ -12,23 +14,43 @@ def keyword_cipher(msg, keyword):
             work_keyword += i
 
     encryption_key = work_keyword + alphabet
-    print(encryption_key)
-
-    #d = dict()
-    # for i in range(len(string.ascii_lowercase)):
-    #     key = string.ascii_lowercase[i]
-    #     value = encryption_key[i]
-    #     d.setdefault(key, value)
-    # ниже альтернатива,
-
     d = {string.ascii_lowercase[i]: encryption_key[i] for i in range(len(string.ascii_lowercase))}
-
     answer = ''.join([str(d.get(i, ' ')) for i in msg])
 
     return answer
 
+def greet(name: str):
+    greeting = f'Hello {name[0].capitalize() + name[1:].lower()}!'
+    return greeting
 
-print(keyword_cipher("Welcome home","secret"))
+
+
+@allure.feature('Crypto_feature')
+@allure.story('Positive tests')
+@pytest.mark.parametrize("msg, keyword, result", [
+    ("Welcome home", "secret", "wticljt dljt"),
+    ("WELCOME HOME", "gridlocked", "wlfimhl kmhl"),
+    ("alpha bravo charlie", "delta", "djofd eqdvn lfdqjga"),
+    ("Home Base", "seven", "dlja esqa")
+])
+def test_keyword_cipher(msg, keyword, result):
+    with allure.step("1st step"):
+        assert keyword_cipher(msg, keyword) == str(result)
+
+
+@allure.feature('Greeting_feture')
+@allure.story('Positive tests of Greeting')
+@pytest.mark.parametrize("name, result", [
+    ("jane", "Jane"),
+    ("ALPH", "Alph")
+])
+def test_greet(name, result):
+    assert greet(name) == f"Hello {result}!"
+
+
+
+
+# print(keyword_cipher("Welcome home","secret"))
 
 
 # names = ['Ivan', 'Fedor', 'Alex', 'Scott']
