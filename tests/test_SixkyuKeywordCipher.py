@@ -20,7 +20,8 @@ def keyword_cipher(msg, keyword):
     return answer
 
 def greet(name: str):
-    greeting = f'Hello {name[0].capitalize() + name[1:].lower()}!'
+    with allure.step('Прописываю шаг изнутри функции'):
+        greeting = f'Hello {name[0].capitalize() + name[1:].lower()}!'
     return greeting
 
 
