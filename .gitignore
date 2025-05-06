@@ -3,6 +3,7 @@
 downloads/
 Log/
 *.log
+results/
 
 __pycache__/
 .pytest_cache
