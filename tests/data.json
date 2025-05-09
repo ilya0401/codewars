@@ -1,0 +1,44 @@
+[
+    {
+        "st": "Pirates say arrrrrrrrr.",
+        "l": "r",
+        "result": "arrrrrrrr",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": "Free coffee for all office workers!",
+        "l": "F",
+        "result": "rfeofi",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": "king kUnta is the sickest rap song ever kNown k!",
+        "l": "k",
+        "result": "iUeN",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": "p8tice makes pottery p0rfect!",
+        "l": "p",
+        "result": "o",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": "d8u d._ rly 2d1s",
+        "l": "D",
+        "result": "",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": "nothing to be found here",
+        "l": "z",
+        "result": "",
+        "expectation": "does_not_raise"
+    },
+    {
+        "st": 12,
+        "l": "z",
+        "result": "",
+        "expectation": "pytest.raises(TypeError)"
+    }
+]
