@@ -22,7 +22,10 @@ def gamble(rolls, my_coins, pot):
             pot = pot + 1
     return my_coins
 
-print(gamble(['Nun'], 10, 20))
-print(gamble(['Gimel'], 10, 20))
-print(gamble(['Shin', 'Shin', 'Hei'], 1, 20))
-print(gamble(['Nun', 'Gimel', 'Nun', 'Shin', 'Hei', 'Shin', 'Hei', 'Hei'], 49, 81))
+# print(gamble(['Nun'], 10, 20))
+# print(gamble(['Gimel'], 10, 20))
+# print(gamble(['Shin', 'Shin', 'Hei'], 1, 20))
+# print(gamble(['Nun', 'Gimel', 'Nun', 'Shin', 'Hei', 'Shin', 'Hei', 'Hei'], 49, 81))
+a = int(input())
+b = int(input())
+print(a+b)
