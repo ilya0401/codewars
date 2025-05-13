@@ -12,7 +12,7 @@ def load_test_cases():
         content = json.load(file)
         test_data = []
         for case in content:
-            expectation = does_not_raise() if case['expectation'] == "does_not_raise" else pytest.raises(TypeError)
+            expectation = does_not_raise() if case['expectation'] == "does_not_raise()" else pytest.raises(TypeError)
             test_data.append((case['st'], case['l'], case['result'], expectation))
         return test_data
 
