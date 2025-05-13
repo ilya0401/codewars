@@ -1,0 +1,57 @@
+[
+    {
+        "coords": [0.5, 5],
+        "radius": 1,
+        "res": "True"
+    },
+    {
+        "coords": [0.5, 0.5, 0.5],
+        "radius": 1,
+        "res": "True"
+    },
+    {
+        "coords": [0.5, 0.5, 0.5, 0.5, 0.5],
+        "radius": 1,
+        "res": "False"
+    },
+    {
+        "coords": [1, 0],
+        "radius": 1,
+        "res": "True"
+    },
+    {
+        "coords": [3, 0],
+        "radius": "3",
+        "res": "True"
+    },
+    {
+        "coords": [1, 0, 0.1],
+        "radius": 1,
+        "res": "False"
+    },
+    {
+        "coords": [3, 4, 5],
+        "radius": 6,
+        "res": "False"
+    },
+    {
+        "coords": [],
+        "radius": 1,
+        "res": "True"
+    },
+    {
+        "coords": [0.5, 0.5, -0.5, -0.5, -0.5],
+        "radius": 2,
+        "res": "True"
+    },
+    {
+        "coords": [0, 0, 0, 0, 0],
+        "radius": 0,
+        "res": "True"
+    },
+    {
+        "coords": [0.1, -2, -3],
+        "radius": 0,
+        "res": "False"
+    }
+]
