@@ -54,6 +54,6 @@ def countMostUsed(s: str):
 
             return most_used, s_len
 
-with open ("test_data.txt", "r") as file:
-    content = file.read()
-    print(countMostUsed(content))
+# with open ("test_data.txt", "r") as file:
+#     content = file.read()
+#     print(countMostUsed(content))
