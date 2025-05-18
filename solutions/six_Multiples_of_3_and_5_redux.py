@@ -1,15 +1,29 @@
-# def solution(number):
-#     # l1 = [x for x in range(1, number) if x%3 == 0 or x%5 ==0]
-#     def sum_of_multiples_of_k(k):
-#         m = (number-1) // k
-#         sum = k * (m * (m + 1)/2)
-#         return sum
-#     result = sum_of_multiples_of_k(3) + sum_of_multiples_of_k(5) - sum_of_multiples_of_k(15)
-#     return result
-#
-# print(int(solution(10)))
 import json
+from datetime import datetime
 from plistlib import dumps
+
+def time_decorator(fn):
+    def wrapper(*args):
+        start = datetime.now()
+        res = fn(*args)
+        finish = datetime.now()
+        time = finish - start
+        return f"Run time = {time}", res
+    return wrapper
+
+
+@time_decorator
+def solution(number):
+    # l1 = [x for x in range(1, number) if x%3 == 0 or x%5 ==0]
+    def sum_of_multiples_of_k(k):
+        m = (number-1) // k
+        sum = k * (m * (m + 1)//2)
+        return sum
+    result = sum_of_multiples_of_k(3) + sum_of_multiples_of_k(5) - sum_of_multiples_of_k(15)
+    return result
+
+print(solution(42540991528042323181746995980200))
+
 
 
 #
