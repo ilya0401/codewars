@@ -1,0 +1,16 @@
+[
+  {"last_name": "Ivano_first",
+    "gender": "male",
+    "birth_date": "01.01.2001",
+    "baggage": "added"},
+
+  {"last_name": "Sidorova",
+    "gender": "female",
+    "birth_date": "02.02.1990",
+    "baggage": "added"},
+
+  {"last_name": "Akimov",
+    "gender": "male",
+    "birth_date": "03.03.1988",
+    "baggage": "NOT added"}
+]
