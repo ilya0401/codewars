@@ -85,7 +85,7 @@ def is_polydivisible(number: int) -> bool:
     return True
 
 
-@time_decorator
+
 def next_polydivisible(n: int):
     current = n + 1
     while True:
@@ -96,5 +96,75 @@ def next_polydivisible(n: int):
             return None
 
 
-result = next_polydivisible(998)
-print(result)
+# result = next_polydivisible(998)
+# print(result)
+
+
+def next_num_2(n):
+    n += 1
+    n = list(str(n)) # здесь в виде списка число которое проверяем на полиделимость
+    # [1,3,3,0,0]
+
+    res = ''
+    for i in range(1, len(n) + 1): # циклом иду: проверяю все первые числа поп порядку на делимость на кол-во цифр в этом числе
+        # если все числа делятся на кол-во цифр - то это и есть искомое число
+        num = int(''.join(n[:i])) # срез: проверяемое число
+        is_devidable = num % i
+        last_digit = n[i - 1]
+        if is_devidable == False:
+            res += last_digit
+        else:   # если не делится, то: после днюю цифру в числе увеличиваю на 1, а все оставшиеся цифры (если они есть)
+                # меняю на нули
+            # последняя рассматриваемая цифра - это n_list[i-1]
+            res = ''
+            if int(last_digit) != 9:
+                # 13 не делится на 2 без остатка - поэтому увеличиваю 3 на 1. все остальные цифры за ней меняю на 0
+                # и начинаю проверку нового числа 14
+                new_num = n[:i - 1] + [str(int(last_digit) + 1)] + ["0"] * len(n[i:])
+                new_num_int = int(''.join(new_num)) - 1
+                return next_num_2(new_num_int)
+            else:
+                # здесь описываю если число не делится и число == 9
+                # написать реализацию если последняя цифра == 9
+                # надо увеличивать на единицу число перед 9 и все после этого числа занулять
+                # рекурсивно вызывать функцию с новым числом
+                if i - 1 == 0: # если 9 - это первая цифра в числе
+                    pass
+                else:
+                    # если 9 это не первая цифра в числе - увеличиваем на 1 предыдущую отстальные зануляем
+                    ind = i - 1
+                    pre = list(map(str, (n[:ind])))
+                    int_prefix = int(''.join(pre))
+                    summed_prefix = int_prefix + 1
+                    listed_summed_prefix = list(str(summed_prefix))
+                    new_num = listed_summed_prefix + ["0"] * len(n[(ind):])
+                    new_num_int = int(''.join(new_num)) - 1
+                    return next_num_2(new_num_int)
+    return int(res)
+
+
+print(next_num_2(3608528850368400786036724))
+         # сценарий: если число делится на кол-во цифр - то переход к следующей i
+
+
+# s = [1,3,9,4,5]
+# index = s.index(9)
+# prefix = list(map(str, (s[:index])))
+# int_prefix = int(''.join(prefix))
+# summed_prefix = int_prefix + 1
+# listed_summed_prefix = list(str(summed_prefix))
+# print(listed_summed_prefix)
+#
+#
+# new_num = listed_summed_prefix + ["0"] * len(s[(index-1):])
+# print(prefix)
+# print(new_num)
+# # i = 3
+# new_num = s[:i-1] + [int(s[i-1]) + 1] + [0] * len(s[i:])
+# new_num = list(map(str, new_num))
+# new_num_int = int(''.join(new_num))
+# print(f"Было {s_int}. Стало {new_num_int}")
+
+
+s = 3608528850368400786036725
+print(len(str(s)))
