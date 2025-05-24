@@ -99,7 +99,7 @@ def next_num_my(n):
     # [1,3,3,0,0]
 
     res = ''
-    for i in range(1, len(n) + 1): # циклом иду: проверяю все первые числа поп порядку на делимость на кол-во цифр в этом числе
+    for i in range(1, len(n) + 1): # циклом иду: проверяю все первые числа по порядку на делимость на кол-во цифр в этом числе
         # если все числа делятся на кол-во цифр - то это и есть искомое число
         num = int(''.join(n[:i])) # срез: проверяемое число
         is_devidable = num % i
@@ -136,91 +136,96 @@ def next_num_my(n):
     return int(res)
 
 
-def next_num_ai_2(n: int):
-    def is_polydivisible(number: int) -> bool:
-        s = str(number)
-        for i in range(1, len(s) + 1):
-            if int(s[:i]) % i != 0:
-                return False
-        return True
+new_num = k[:i - 1]
 
-    current = n + 1
-    while current <= 10**20:
-        if is_polydivisible(current):
-            return current
-        # "Умный прыжок": пропускаем заведомо неподходящие числа
-        s = str(current)
-        for i in range(1, len(s) + 1):
-            prefix = int(s[:i])
-            if prefix % i != 0:
-                step = i - (prefix % i)
-                multiplier = 10 ** (len(s) - i)
-                current += step * multiplier
-                break
-    return None
-
-def next_num_ai(n):
-    while True:
-        n += 1
-        n_str = list(str(n))
-        res = ''
-        valid = True
-
-        for i in range(1, len(n_str) + 1):
-            num = int(''.join(n_str[:i]))
-            last_digit = n_str[i - 1]
-
-            if num % i != 0:
-                valid = False
-                # Корректируем число
-                if int(last_digit) != 9:
-                    prefix = n_str[:i - 1]
-                    new_part = [str(int(last_digit) + 1)] + ['0'] * len(n_str[i:])
-                    n = int(''.join(prefix + new_part)) - 1
-                    break
-                else:
-                    ind = i - 1
-                    if ind == 0:
-                        # если первая цифра — 9
-                        n = 10 ** len(n_str) - 1
-                        break
-                    else:
-                        pre = n_str[:ind]
-                        summed_prefix = str(int(''.join(pre)) + 1)
-                        new_num = list(summed_prefix) + ['0'] * len(n_str[ind:])
-                        n = int(''.join(new_num)) - 1
-                        break
-
-        if valid:
-            return int(''.join(n_str))
+print(new_num)
 
 
-def next_num_my_raw(n):
-    n += 1
-    n = list(str(n))  # здесь в виде списка число, которое проверяем на полиделимость
-    res = ''
+# def next_num_ai_2(n: int):
+#     def is_polydivisible(number: int) -> bool:
+#         s = str(number)
+#         for i in range(1, len(s) + 1):
+#             if int(s[:i]) % i != 0:
+#                 return False
+#         return True
+#
+#     current = n + 1
+#     while current <= 10**20:
+#         if is_polydivisible(current):
+#             return current
+#         # "Умный прыжок": пропускаем заведомо неподходящие числа
+#         s = str(current)
+#         for i in range(1, len(s) + 1):
+#             prefix = int(s[:i])
+#             if prefix % i != 0:
+#                 step = i - (prefix % i)
+#                 multiplier = 10 ** (len(s) - i)
+#                 current += step * multiplier
+#                 break
+#     return None
 
-    for i in range(1,
-                   len(n) + 1):  # циклом иду: проверяю все первые числа по порядку на делимость на кол-во цифр в этом числе
-        num = int(''.join(n[:i]))  # срез: проверяемое число
-        is_devidable = num % i
-        last_digit = n[i - 1]
+# def next_num_ai(n):
+#     while True:
+#         n += 1
+#         n_str = list(str(n))
+#         res = ''
+#         valid = True
+#
+#         for i in range(1, len(n_str) + 1):
+#             num = int(''.join(n_str[:i]))
+#             last_digit = n_str[i - 1]
+#
+#             if num % i != 0:
+#                 valid = False
+#                 # Корректируем число
+#                 if int(last_digit) != 9:
+#                     prefix = n_str[:i - 1]
+#                     new_part = [str(int(last_digit) + 1)] + ['0'] * len(n_str[i:])
+#                     n = int(''.join(prefix + new_part)) - 1
+#                     break
+#                 else:
+#                     ind = i - 1
+#                     if ind == 0:
+#                         # если первая цифра — 9
+#                         n = 10 ** len(n_str) - 1
+#                         break
+#                     else:
+#                         pre = n_str[:ind]
+#                         summed_prefix = str(int(''.join(pre)) + 1)
+#                         new_num = list(summed_prefix) + ['0'] * len(n_str[ind:])
+#                         n = int(''.join(new_num)) - 1
+#                         break
+#
+#         if valid:
+#             return int(''.join(n_str))
 
-        if not is_devidable:
-            res += last_digit
-        else:  # если не делится
-            res = ''
-            if int(n[i - 1]) != 9:
-                # Увеличиваем последнюю цифру на 1 и заменяем остальные на 0
-                new_num = n[:i - 1] + [str(int(last_digit) + 1)] + ["0"] * len(n[i:])
-                new_num_int = int(''.join(new_num)) - 1
-                return next_num_my_raw(new_num_int)  # рекурсивный вызов с новым числом
-            else:
-                # Обработка случая, когда последняя цифра равна 9
-                # Здесь можно добавить логику для обработки 9, если это необходимо
-                pass
 
-    return res
+# def next_num_my_raw(n):
+#     n += 1
+#     n = list(str(n))  # здесь в виде списка число, которое проверяем на полиделимость
+#     res = ''
+#
+#     for i in range(1,
+#                    len(n) + 1):  # циклом иду: проверяю все первые числа по порядку на делимость на кол-во цифр в этом числе
+#         num = int(''.join(n[:i]))  # срез: проверяемое число
+#         is_devidable = num % i
+#         last_digit = n[i - 1]
+#
+#         if not is_devidable:
+#             res += last_digit
+#         else:  # если не делится
+#             res = ''
+#             if int(n[i - 1]) != 9:
+#                 # Увеличиваем последнюю цифру на 1 и заменяем остальные на 0
+#                 new_num = n[:i - 1] + [str(int(last_digit) + 1)] + ["0"] * len(n[i:])
+#                 new_num_int = int(''.join(new_num)) - 1
+#                 return next_num_my_raw(new_num_int)  # рекурсивный вызов с новым числом
+#             else:
+#                 # Обработка случая, когда последняя цифра равна 9
+#                 # Здесь можно добавить логику для обработки 9, если это необходимо
+#                 pass
+#
+#     return res
 
 #
 # print(next_num_ai(998))
